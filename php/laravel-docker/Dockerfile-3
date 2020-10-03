@@ -1,0 +1,12 @@
+# Redis Service
+redis:
+  image: redis:latest
+  container_name: redis
+  environment:
+    - REDIS_PASSWORD=YOUR_PASSWORD
+  ports:
+    - "6379:6379"
+  restart: unless-stopped
+  command: ["redis-server", "--requirepass", "YOUR_PASSWORD"]
+  networks:
+    - app-network 
