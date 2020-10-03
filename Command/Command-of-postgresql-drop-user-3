@@ -1,0 +1,28 @@
+Cheat Sheet
+
+Here are important commands
+
+CREATE USER [user]
+	
+
+Command to Create a User
+
+ALTER USER role_specification
+	
+
+Altering Existing User Permissions
+
+ALTER USER [user]
+	
+
+Revoking Permissions
+
+ALTER USER [user name] WITH SUPERUSER
+	
+
+Assigning Permission
+
+DROP USER [user]
+	
+
+Command to Delete a User 

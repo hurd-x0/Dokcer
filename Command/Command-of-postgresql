@@ -1,0 +1,76 @@
+
+STEP 1: Login to the Linux server using postgres OS User
+
+psql -U postgres -h 172.17.0.2
+
+STEP 2: connect to the database.
+
+#Get list of all database in postgresql 
+
+postgres=# select datname from pg_database;
+
+STEP 3: Creating PostgreSQL user.
+
+postgres=# create user test with password 'test123';
+
+STEP 4: Create one database so that user can login to the database.
+
+If you want you can connect to any of your database and grant access to the user on that database.
+
+ postgres=# create database testdb
+
+You can also create database from the Linux terminal using postgres user.
+bash-4.1$ createdb pgdb
+
+Step 5: Grant database access to the new user.
+
+ postgres=# GRANT ALL PRIVILEGES ON DATABASE testdb to test;
+
+STEP 6: Create Linux user account at OS Level for the same database user.
+
+Login to Linux using root and create same user “test” at OS Level to allow user to login to database without password.
+
+# adduser test
+# passwd test
+
+STEP 7: Test user login to the database without password.
+
+[root@orahow postgres_db]# su test
+ [test@orahow postgres_db]$ psql -d pgdb
+ psql (9.6.0)
+ Type "help" for help.
+ pgdb=>
+
+You can also login to the database using database name.
+
+$ psql -d pgdb -U test -w test123
+
+Synopsis:
+
+CREATE USER name [ [ WITH ] option [ ... ] ]
+
+where option can be:
+    
+      SYSID uid 
+    | CREATEDB | NOCREATEDB
+    | CREATEUSER | NOCREATEUSER
+    | IN GROUP groupname [, ...]
+    | [ ENCRYPTED | UNENCRYPTED ] PASSWORD 'password'
+    | VALID UNTIL 'abstime' 
+
+Examples:
+
+create user test with password 'test123';
+
+Create a user with with create database privilege.
+
+CREATE USER devdemo WITH PASSWORD 'P0stgResq1' CREATEDB;
+
+You can also add a user to an existing group and specify a date when the user’s password will expire.
+
+template1=# CREATE USER testuser WITH PASSWORD 'pAssw0rd';
+ CREATE USER
+ template1=# CREATE USER testuser VALID UNTIL 'Jan 31 2030';
+ CREATE USER
+
+

@@ -1,0 +1,42 @@
+
+
+	
+docker network create --subnet 192.168.10.0/24 --driver bridge prod
+
+
+docker run -it --name con2 --ip 192.168.10.99 --network prod centos:latest
+
+	
+docker network connect bridge con2
+
+docker network disconnect bridge con2
+
+docker inspect con2 |grep "IPAddress"
+
+
+
+
+Host Network
+
+
+docker run -it --name con1 --network host centos:latest
+
+
+
+
+
+ Inspecting the Network
+
+docker network ls
+
+docker inspect -f '{{range .IPAM.Config}}{{.Subnet}}{{end}}' network1
+
+docker inspect network1
+
+docker ps --format 'table {{.ID}}\t{{.Names}}'
+
+
+docker inspect 78c10f03ad89 --format '{{.NetworkSettings.Networks.network1.IPAddress}}'
+
+
+docker exec 78c10f03ad89 cat /etc/hosts
