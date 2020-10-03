@@ -1,0 +1,26 @@
+###############################################################################
+#                          Generated on phpdocker                   	      #
+###############################################################################
+version: "3.1"
+services:
+
+mariadb:
+      image: mariadb:latest
+      container_name: mariadb
+      working_dir: /application
+      volumes:
+        - .:/application
+      environment:
+        - MYSQL_ROOT_PASSWORD=32547561
+        - MYSQL_DATABASE=database_db
+        - MYSQL_USER=master
+        - MYSQL_PASSWORD=2547561
+      ports:
+        - "3306:3306"
+      volumes:
+        - /home/master/mariadb/db:/var/lib/mysql
+        - /home/master/mariadb/conf:/etc/mysql/conf.d
+
+
+
+
